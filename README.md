@@ -1,3 +1,4 @@
+
 # 🔐 AuthProject - Full Django Authentication System
 
 Modern Django authentication system with JWT, OTP, Roles, and beautiful Tailwind UI.
@@ -221,3 +222,7 @@ MySQL driver: `pip install mysqlclient`
 - OTP 10 minutes mein expire
 - CSRF protection har form par
 - Role-based access control decorators se
+=======
+# authproject-django
+Django authentication system with login, signup and dashboard functionality.
+
