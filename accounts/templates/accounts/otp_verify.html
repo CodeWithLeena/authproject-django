@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Verify OTP{% endblock %}
+{% block content %}
+<div class="min-h-screen flex items-center justify-center px-4">
+  <div class="w-full max-w-md fade-in">
+    <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-800 overflow-hidden">
+      <div class="bg-gradient-to-r from-violet-600 to-indigo-600 px-8 py-8 text-center">
+        <div class="text-4xl mb-2">🔢</div>
+        <h1 class="text-2xl font-bold text-white">Enter OTP</h1>
+        <p class="text-violet-200 text-sm mt-1">Sent to {{ email }}</p>
+      </div>
+      <div class="p-8">
+        <form method="POST">
+          {% csrf_token %}
+          <div class="space-y-5">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 text-center">6-digit Code</label>
+              {{ form.otp }}
+              <p class="text-center text-xs text-gray-500 dark:text-gray-400 mt-2">Valid for 10 minutes</p>
+            </div>
+            <button type="submit" class="w-full py-3 px-4 bg-violet-600 hover:bg-violet-700 text-white font-semibold rounded-lg transition">
+              Verify OTP
+            </button>
+          </div>
+        </form>
+        <p class="mt-4 text-center text-sm">
+          <a href="{% url 'otp_login' %}" class="text-indigo-600 dark:text-indigo-400 hover:underline">Resend OTP</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

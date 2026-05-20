@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Delete User{% endblock %}
+{% block content %}
+<div class="fade-in max-w-md mx-auto">
+  <div class="bg-white dark:bg-gray-900 rounded-2xl border border-red-200 dark:border-red-900 shadow-sm p-8 text-center">
+    <div class="text-5xl mb-4">⚠️</div>
+    <h1 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Delete User?</h1>
+    <p class="text-gray-500 dark:text-gray-400 mb-6">
+      Are you sure you want to permanently delete <strong>{{ target_user.get_full_name }}</strong> ({{ target_user.email }})?
+      This action cannot be undone.
+    </p>
+    <div class="flex gap-3">
+      <a href="{% url 'admin_panel' %}" class="flex-1 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition text-center">
+        Cancel
+      </a>
+      <form method="POST" class="flex-1">
+        {% csrf_token %}
+        <button type="submit" class="w-full py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition">
+          Yes, Delete
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

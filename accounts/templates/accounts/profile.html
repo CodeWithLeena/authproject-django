@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}My Profile{% endblock %}
+{% block content %}
+<div class="fade-in max-w-3xl mx-auto space-y-6">
+  <h1 class="text-2xl font-bold text-gray-900 dark:text-white">My Profile</h1>
+
+  <div class="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm overflow-hidden">
+    <!-- Cover + Avatar -->
+    <div class="h-24 bg-gradient-to-r from-indigo-500 to-purple-600"></div>
+    <div class="px-8 pb-6">
+      <div class="flex items-end gap-4 -mt-10 mb-4">
+        {% if user.profile_photo %}
+        <img src="{{ user.profile_photo.url }}" class="w-20 h-20 rounded-full object-cover border-4 border-white dark:border-gray-900 shadow-lg" alt="">
+        {% else %}
+        <div class="w-20 h-20 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 border-4 border-white dark:border-gray-900 shadow-lg flex items-center justify-center text-white text-2xl font-bold">
+          {{ user.get_short_name|first|upper }}
+        </div>
+        {% endif %}
+        <div class="flex-1 pb-2">
+          <h2 class="text-xl font-bold text-gray-900 dark:text-white">{{ user.get_full_name }}</h2>
+          <p class="text-gray-500 dark:text-gray-400 text-sm">@{{ user.username }}</p>
+        </div>
+        <a href="{% url 'profile_edit' %}" class="py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition">
+          Edit Profile
+        </a>
+      </div>
+
+      {% if user.bio %}
+      <p class="text-gray-600 dark:text-gray-300 mb-4 italic">"{{ user.bio }}"</p>
+      {% endif %}
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+        <div class="flex items-center gap-2 text-gray-600 dark:text-gray-300"><span>📧</span> {{ user.email }}</div>
+        {% if user.phone %}<div class="flex items-center gap-2 text-gray-600 dark:text-gray-300"><span>📱</span> {{ user.phone }}</div>{% endif %}
+        <div class="flex items-center gap-2 text-gray-600 dark:text-gray-300"><span>📅</span> Joined {{ user.date_joined|date:"F Y" }}</div>
+        <div class="flex items-center gap-2">
+          <span>✅</span>
+          {% if user.is_email_verified %}
+          <span class="text-green-600 dark:text-green-400">Email Verified</span>
+          {% else %}
+          <span class="text-amber-600">Email Not Verified</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Activity -->
+  <div class="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm p-6">
+    <h3 class="font-semibold text-gray-900 dark:text-white mb-4">Login Activity</h3>
+    {% if activities %}
+    <div class="space-y-2">
+      {% for a in activities %}
+      <div class="flex items-center gap-3 py-2 border-b border-gray-100 dark:border-gray-800 last:border-0">
+        <span class="text-lg">🔔</span>
+        <div class="flex-1">
+          <p class="text-sm font-medium">{{ a.action }}</p>
+          <p class="text-xs text-gray-500">{{ a.timestamp|date:"d M Y, H:i" }} • {{ a.ip_address }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-sm text-gray-400 text-center py-4">No activity recorded yet.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

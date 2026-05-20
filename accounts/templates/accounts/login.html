@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %}Login - AuthProject{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center px-4">
+  <div class="w-full max-w-md fade-in">
+
+    <!-- Card -->
+    <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-800 overflow-hidden">
+
+      <!-- Header -->
+      <div class="bg-gradient-to-r from-indigo-600 to-purple-600 px-8 py-8 text-center">
+        <div class="text-4xl mb-2">🔐</div>
+        <h1 class="text-2xl font-bold text-white">Welcome Back</h1>
+        <p class="text-indigo-200 text-sm mt-1">Sign in to your account</p>
+      </div>
+
+      <div class="p-8">
+        <form method="POST" novalidate>
+          {% csrf_token %}
+          <div class="space-y-5">
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email Address</label>
+              {{ form.email }}
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Password</label>
+              {{ form.password }}
+            </div>
+
+            <div class="flex items-center justify-between">
+              <label class="flex items-center gap-2 text-sm cursor-pointer">
+                {{ form.remember_me }}
+                <span class="text-gray-600 dark:text-gray-400">Remember me</span>
+              </label>
+              <a href="{% url 'forgot_password' %}" class="text-sm text-indigo-600 dark:text-indigo-400 hover:underline">
+                Forgot password?
+              </a>
+            </div>
+
+            <button type="submit" class="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg transition duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+              Sign In
+            </button>
+
+          </div>
+        </form>
+
+        <!-- Divider -->
+        <div class="my-6 flex items-center gap-3">
+          <div class="flex-1 h-px bg-gray-200 dark:bg-gray-700"></div>
+          <span class="text-xs text-gray-400">or</span>
+          <div class="flex-1 h-px bg-gray-200 dark:bg-gray-700"></div>
+        </div>
+
+        <!-- OTP Login -->
+        <a href="{% url 'otp_login' %}" class="w-full flex items-center justify-center gap-2 py-3 px-4 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition">
+          📱 Login with OTP
+        </a>
+
+        <p class="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
+          Don't have an account?
+          <a href="{% url 'register' %}" class="text-indigo-600 dark:text-indigo-400 font-medium hover:underline">Create one</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Dark mode toggle for unauthenticated -->
+    <div class="mt-4 text-center">
+      <button @click="darkMode = !darkMode" class="text-xs text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition">
+        Toggle dark mode 🌙
+      </button>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
