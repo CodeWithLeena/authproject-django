@@ -226,3 +226,28 @@ MySQL driver: `pip install mysqlclient`
 # authproject-django
 Django authentication system with login, signup and dashboard functionality.
 
+# AuthProject Django
+
+Django authentication system with login, signup, OTP login and dashboard functionality.
+
+## Features
+- User Authentication
+- OTP Login
+- Profile Management
+- Admin Dashboard
+- Dark Mode
+- Email Verification
+
+## Screenshots
+
+### Login Page
+![Login](screenshots/login-page.png)
+
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### Profile Page
+![Profile](screenshots/profile-page.png)
+
+### Admin Panel
+![Admin](screenshots/admin-panel.png)
